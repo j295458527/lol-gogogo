@@ -1,0 +1,26 @@
+{
+  "name": "lol-gogogo",
+  "version": "1.0.0",
+  "description": "搜索英雄，查看介绍",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yangbin1994/lol-gogogo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yangbin1994/lol-gogogo/issues"
+  },
+  "homepage": "https://github.com/yangbin1994/lol-gogogo#readme",
+  "dependencies": {
+    "weui": "^1.0.2"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-uglify": "^2.0.0"
+  }
+}
