@@ -17,10 +17,16 @@
   },
   "homepage": "https://github.com/yangbin1994/lol-gogogo#readme",
   "dependencies": {
+    "bootstrap": "^3.3.7",
     "weui": "^1.0.2"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
-    "gulp-uglify": "^2.0.0"
+    "gulp-clean-css": "^2.0.13",
+    "gulp-less": "^3.1.0",
+    "gulp-uglify": "^2.0.0",
+    "gulp-util": "^3.0.7",
+    "gulp-watch": "^4.3.10",
+    "through2": "^2.0.1"
   }
 }
