@@ -9,7 +9,7 @@ var through = require('through2');
 var gutil = require('gulp-util');
 var PluginError = gutil.PluginError;
 
-
+var __DEV__;
 
 function handleFile(path) {
     var dirs = fs.readdirSync(path);
@@ -22,7 +22,8 @@ function handleFile(path) {
         } else {
             var stream = gulp.src(path2);
             if (suffix == 'js') {
-                // stream.pipe(minify())
+                if (!__DEV__)
+                    stream.pipe(minify())
             } else if (suffix == 'wxss' || suffix == 'css') {
                 stream.pipe(less())
                     .pipe(mincss())
@@ -57,6 +58,7 @@ gulp.task('pro', function () {
 });
 
 gulp.task('dev', function () {
+    __DEV__ = true;
     handleFile('./src')
     watch('./src', function () {
         handleFile('./src')
