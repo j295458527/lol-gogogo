@@ -34,14 +34,12 @@ function handleFile(path) {
                                 cb(null, file);
                             }
                             if (file.isBuffer()) {
-                                // todo ??????
-                                file.contents = new Buffer(file.contents.toString().replace(/(\w)([\.#])(\w)/ig, '$1_$2$3').replace(/([^(media | keyframes)])\s/ig, '$1'));
+                                file.contents = new Buffer(file.contents.toString().replace(/(\w)([\.#])(\w)/ig, '$1_$2$3').replace(/(@media)\s/ig, '$1#').replace(/\s(and)\s/ig, '#$1#').replace(/\s/ig,'-').replace(/#/ig, ' '));
                             }
                             if (file.isStream()) {
+                                throw new Error('unexpect stream')
                             }
-
                             cb(null, file);
-
                         });
                     })())
             } else {

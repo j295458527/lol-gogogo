@@ -6,20 +6,21 @@
 module.exports = (function () {
 
 	var _obj2Params = function (obj, startTag) {
-		var result = startTag;
+		var result = startTag
 		for (var key in obj) {
 			result += key + '=' + obj[key] + '&'
 		}
 		return result.slice(0, -1);
 	}
 
+	// this作为page的options方法
 	var upLoadData = function (options) {
 		this.setData({
 			tarUploadSrc: "http://api.scrm.weisgj.com/wxtags/batchuntag?&random=" + Math.random() + _obj2Params('&')
 		})
 	}
-
-	var wrapActionHandle = function (actionFuncName, eventParams) {
+	// this作为page的options方法
+	var wrapActionHandle = (actionFuncName, eventParams) => {
 
 		switch (actionFuncName) {
 			case 'onLoad':
@@ -46,36 +47,36 @@ module.exports = (function () {
 			default:
 				switch (eventParams.type) {
 					case 'tap':
-						console.log('tap', '=>', eventParams);
+						console.log('tap', '=>', eventParams)
 						break;
 					case 'touchstart':
-						console.log('touchstart', '=>', eventParams);
+						console.log('touchstart', '=>', eventParams)
 						break;
 					case 'touchmove':
-						console.log('touchmove', '=>', eventParams);
+						console.log('touchmove', '=>', eventParams)
 						break;
 					case 'touchcancel':
-						console.log('touchcancel', '=>', eventParams);
+						console.log('touchcancel', '=>', eventParams)
 						break;
 					case 'touchend':
-						console.log('touchend', '=>', eventParams);
+						console.log('touchend', '=>', eventParams)
 						break;
 					case 'tap':
-						console.log('tap', '=>', eventParams);
+						console.log('tap', '=>', eventParams)
 						break;
 					case 'longtap':
-						console.log('longtap', '=>', eventParams);
+						console.log('longtap', '=>', eventParams)
 						break;
 					default:
-						console.log('default', '=>', eventParams);
+						console.log('default', '=>', eventParams)
 						break;
 				}
 				break;
 		}
 	}
 
-	const glPage = Page;
-	Page = function (options) {
+	const glPage = Page
+	Page = (options) => {
 
 		!options.onLoad && (options.onLoad = function onLoad() { }),
 			!options.onReady && (options.onReady = function onReady() { }),
@@ -94,38 +95,38 @@ module.exports = (function () {
 						wrapActionHandle.call(this, temp.name, arguments);
 						temp.apply(this, arguments);
 					}
-				})()
+				})();
 			}
 		}
 
-		glPage(options);
+		glPage(options)
 	}
 
-	const glWx = wx;
-	wx = (function () {
+	const glWx = wx
+	wx = (() => {
 
-		var login = function (options) {
-			console.log('login');
+		var login = (options) => {
+			console.log('login')
 			return glWx.login(options);
 		}
 
-		var getUserInfo = function (cb) {
-			console.log('getUserInfo');
+		var getUserInfo = (cb) => {
+			console.log('getUserInfo')
 			return glWx.getUserInfo(cb);
 		}
 
-		var getStorageSync = function (key) {
-			console.log('getStorageSync');
+		var getStorageSync = (key) => {
+			console.log('getStorageSync')
 			return glWx.getStorageSync(key);
 		}
 
-		var setStorageSync = function (key) {
-			console.log('setStorageSync');
+		var setStorageSync = (key) => {
+			console.log('setStorageSync')
 			return glWx.getStorageSync(key);
 		}
 
-		var navigateTo = function (options) {
-			console.log('navigateTo');
+		var navigateTo = (options) => {
+			console.log('navigateTo')
 			return glWx.navigateTo(options);
 		}
 
