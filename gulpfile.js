@@ -4,12 +4,13 @@ var fs = require('fs');
 var watch = require('gulp-watch');
 var less = require('gulp-less');
 var mincss = require('gulp-clean-css');
+var babel = require("gulp-babel");
 
 var through = require('through2');
 var gutil = require('gulp-util');
 var PluginError = gutil.PluginError;
 
-var __DEV__;
+var __DEV__ = false;
 
 function handleFile(path) {
     var dirs = fs.readdirSync(path);
@@ -22,6 +23,7 @@ function handleFile(path) {
         } else {
             var stream = gulp.src(path2);
             if (suffix == 'js') {
+                stream.pipe(babel());
                 if (!__DEV__)
                     stream.pipe(minify())
             } else if (suffix == 'wxss' || suffix == 'css') {
@@ -34,10 +36,10 @@ function handleFile(path) {
                                 cb(null, file);
                             }
                             if (file.isBuffer()) {
-                                file.contents = new Buffer(file.contents.toString().replace(/(\w)([\.#])(\w)/ig, '$1_$2$3').replace(/(@media)\s/ig, '$1#').replace(/\s(and)\s/ig, '#$1#').replace(/\s/ig,'-').replace(/#/ig, ' '));
+                                // todo ??????
+                                file.contents = new Buffer(file.contents.toString().replace(/(\w)([\.#])(\w)/ig, '$1_$2$3').replace(/([^(media | keyframes)])\s/ig, '$1'));
                             }
                             if (file.isStream()) {
-                                throw new Error('unexpect stream')
                             }
                             cb(null, file);
                         });
@@ -51,7 +53,7 @@ function handleFile(path) {
 }
 
 
-gulp.task('pro', function () {
+gulp.task('prod', function () {
     handleFile('./src')
 });
 
